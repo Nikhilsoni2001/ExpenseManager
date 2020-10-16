@@ -1,9 +1,12 @@
 package com.e.expensemanager.ui.screens
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.e.expensemanager.R
+import kotlinx.android.synthetic.main.activity_on_boarding.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -16,12 +19,23 @@ class SplashActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
+        val sharedPref = getSharedPreferences("myExpense", Context.MODE_PRIVATE)
+        val currency = sharedPref.getString("currency",null)
+
 
         CoroutineScope(Dispatchers.Main).launch {
-            val onBoardingActivity = Intent(this@SplashActivity,OnBoardingActivity::class.java)
-            delay(3000)
-            startActivity(onBoardingActivity)
-            finish()
+
+            if(currency==null) {
+                val onBoardingActivity = Intent(this@SplashActivity, OnBoardingActivity::class.java)
+                delay(3000)
+                startActivity(onBoardingActivity)
+                finish()
+            } else {
+                val expenseActivity = Intent(this@SplashActivity, ExpenseActivity::class.java)
+                delay(3000)
+                startActivity(expenseActivity)
+                finish()
+            }
         }
 
 

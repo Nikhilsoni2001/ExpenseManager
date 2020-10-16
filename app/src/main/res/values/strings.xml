@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Expense Manager</string>
+    <string-array name="currency">
+        <item>Rupees ₹</item>
+        <item>Dollars $</item>
+        <item>Euros €</item>
+    </string-array>
 </resources>
