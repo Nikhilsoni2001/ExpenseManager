@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/miExpenses"
+        android:title="Expenses" />
+    <item
+            android:id="@+id/miIncome"
+            android:title="Income" />
+    <item
+            android:id="@+id/miContact"
+            android:title="Contact" />
+    <item
+            android:id="@+id/miExit"
+            android:title="Exit" />
+</menu>
