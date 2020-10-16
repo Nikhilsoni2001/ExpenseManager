@@ -11,16 +11,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
+        <fragment
+            android:id="@+id/fragment"
+            android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Ishant"
-            android:gravity="center"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="match_parent"
+            app:defaultNavHost="true"
+            app:navGraph="@navigation/nav_graph" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.navigation.NavigationView
@@ -31,5 +30,6 @@
         app:menu="@menu/nav_header_menu"
         android:layout_gravity="start"
         android:fitsSystemWindows="true" />
+
 
 </androidx.drawerlayout.widget.DrawerLayout>
