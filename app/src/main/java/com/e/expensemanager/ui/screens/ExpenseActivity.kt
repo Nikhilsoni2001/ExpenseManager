@@ -17,6 +17,7 @@ import com.e.expensemanager.ui.mvvm.ExpenseRepository
 import com.e.expensemanager.ui.mvvm.ExpenseViewModel
 import com.e.expensemanager.ui.mvvm.ExpenseViewModelProviderFactory
 import kotlinx.android.synthetic.main.activity_expense.*
+import kotlinx.android.synthetic.main.nav_header.view.*
 
 class ExpenseActivity : AppCompatActivity() {
 
@@ -38,10 +39,14 @@ class ExpenseActivity : AppCompatActivity() {
 
 
         val navHeaderView = navView.inflateHeaderView(R.layout.nav_header)
-        navHeaderView.setOnClickListener {
 
-
+        navHeaderView.btnProfit.setOnClickListener {
             findNavController(R.id.fragment).navigate(R.id.expenseGraphFragment)
+        }
+
+        navHeaderView.btnLoss.setOnClickListener {
+            //Toast.makeText(this,"Success",Toast.LENGTH_LONG).show()
+            findNavController(R.id.fragment).navigate(R.id.expenseLossGraphFragment)
         }
 
 

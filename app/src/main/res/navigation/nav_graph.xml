@@ -18,7 +18,12 @@
         tools:layout="@layout/fragment_income" />
     <fragment
         android:id="@+id/expenseGraphFragment"
-        android:name="com.e.expensemanager.ui.fragments.ExpenseGraphFragment"
+        android:name="com.e.expensemanager.ui.fragments.ExpenseProfitGraphFragment"
         android:label="fragment_expense_graph"
-        tools:layout="@layout/fragment_expense_graph" />
+        tools:layout="@layout/fragment_profit_expense_graph" />
+    <fragment
+        android:id="@+id/expenseLossGraphFragment"
+        android:name="com.e.expensemanager.ui.fragments.ExpenseLossGraphFragment"
+        android:label="fragment_expense_loss_graph"
+        tools:layout="@layout/fragment_loss_expense_graph" />
 </navigation>
