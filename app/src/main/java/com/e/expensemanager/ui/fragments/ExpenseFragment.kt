@@ -49,6 +49,9 @@ class ExpenseFragment : Fragment(R.layout.fragment_expense) {
 
 
 
+
+
+
         btnIncrease.setOnClickListener {
             val dialogView = LayoutInflater.from(requireContext()).inflate(
                 R.layout.expense_change_dialog_box,
@@ -174,6 +177,9 @@ class ExpenseFragment : Fragment(R.layout.fragment_expense) {
                        */
                     }
                     show() }
+
+
+
 
 
 

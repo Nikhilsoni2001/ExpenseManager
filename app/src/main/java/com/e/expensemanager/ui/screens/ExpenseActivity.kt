@@ -37,6 +37,14 @@ class ExpenseActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this,factory).get(ExpenseViewModel::class.java)
 
 
+        val navHeaderView = navView.inflateHeaderView(R.layout.nav_header)
+        navHeaderView.setOnClickListener {
+
+
+            findNavController(R.id.fragment).navigate(R.id.expenseGraphFragment)
+        }
+
+
         toggle = ActionBarDrawerToggle(this,drawerLayout,R.string.open,R.string.close)
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()

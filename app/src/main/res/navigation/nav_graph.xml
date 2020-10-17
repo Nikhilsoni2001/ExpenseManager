@@ -16,4 +16,9 @@
         android:name="com.e.expensemanager.ui.fragments.IncomeFragment"
         android:label="fragment_income"
         tools:layout="@layout/fragment_income" />
+    <fragment
+        android:id="@+id/expenseGraphFragment"
+        android:name="com.e.expensemanager.ui.fragments.ExpenseGraphFragment"
+        android:label="fragment_expense_graph"
+        tools:layout="@layout/fragment_expense_graph" />
 </navigation>
