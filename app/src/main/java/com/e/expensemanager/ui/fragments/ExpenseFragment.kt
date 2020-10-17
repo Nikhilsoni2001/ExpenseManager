@@ -40,13 +40,10 @@ class ExpenseFragment : Fragment(R.layout.fragment_expense) {
         var amount = sharedPref?.getInt("amount", 0)
         val currency = sharedPref?.getString("currency", null)
         val editor = sharedPref?.edit()
+        viewModel.getTokenLiveData().observe(viewLifecycleOwner, Observer {
+            tvExpense.text = " ${sharedPref?.getString("currency", null)} $it"
 
-        tvExpense.text = "$currency $amount"
-
-
-
-
-
+        })
 
 
 
@@ -55,28 +52,17 @@ class ExpenseFragment : Fragment(R.layout.fragment_expense) {
         btnIncrease.setOnClickListener {
             val dialogView = LayoutInflater.from(requireContext()).inflate(
                 R.layout.expense_change_dialog_box,
-                null
-            )
+                null)
             val dialogBuilder = AlertDialog.Builder(requireContext()).setView(dialogView).setTitle("Please fill the details")
             val dialogBox = dialogBuilder.show()
-
-
-            /* dialogView.btnSave.setOnClickListener {
-                Toast.makeText(requireContext(),"Hi ${dialogView.etAmount.text}",Toast.LENGTH_LONG).show()
-            } */
-
-
             val etSourceVal = dialogView.findViewById<EditText>(R.id.etSource)
             val etAmountVal = dialogView.findViewById<EditText>(R.id.etAmount)
-
             val sourceVal = etSourceVal.text
             val amountVal = etAmountVal.text
-
-           dialogView.btnSave.setOnClickListener {
-                Toast.makeText(requireContext(), "Hi $amountVal $sourceVal", Toast.LENGTH_LONG).show()
+            dialogView.btnSave.setOnClickListener {
+                Toast.makeText(requireContext(), "$currency$amountVal from $sourceVal added", Toast.LENGTH_LONG).show()
                 if(sourceVal.isNotEmpty()) {
                     if(amountVal.isNotEmpty()) {
-
                         val sdf = SimpleDateFormat("dd MMMM yyyy, hh:mm")
                         val currentDate = sdf.format(Date())
                         val expense = Expense(
@@ -89,16 +75,67 @@ class ExpenseFragment : Fragment(R.layout.fragment_expense) {
                         amount = amount?.plus(amountVal.toString().toInt())
                         editor?.putInt("amount", amount!!)?.apply()
                         viewModel.upsert(expense)
-                    } else {
-                        Toast.makeText(requireContext(), "Please enter Amount", Toast.LENGTH_LONG).show()
-                    }
-                } else {
-
-                    Toast.makeText(requireContext(), "Please enter Source", Toast.LENGTH_LONG).show()
-                }
+                    } else { Toast.makeText(requireContext(), "Please enter Amount", Toast.LENGTH_LONG).show() }
+                } else { Toast.makeText(requireContext(), "Please enter Source", Toast.LENGTH_LONG).show() }
             }
-
         }
+
+
+        btnDecrease.setOnClickListener {
+            val dialogView = LayoutInflater.from(requireContext()).inflate(
+                R.layout.expense_change_dialog_box,
+                null)
+            val dialogBuilder = AlertDialog.Builder(requireContext()).setView(dialogView).setTitle("Please fill the details")
+            val dialogBox = dialogBuilder.show()
+            val etSourceVal = dialogView.findViewById<EditText>(R.id.etSource)
+            val etAmountVal = dialogView.findViewById<EditText>(R.id.etAmount)
+            val sourceVal = etSourceVal.text
+            val amountVal = etAmountVal.text
+            dialogView.btnSave.setOnClickListener {
+                Toast.makeText(requireContext(), "$currency$amountVal from $sourceVal reduced", Toast.LENGTH_LONG).show()
+                if(sourceVal.isNotEmpty()) {
+                    if(amountVal.isNotEmpty()) {
+                        val sdf = SimpleDateFormat("dd MMMM yyyy, hh:mm")
+                        val currentDate = sdf.format(Date())
+                        val expense = Expense(
+                            0,
+                            sourceVal.toString(),
+                            amountVal.toString().toInt(),
+                            "$currentDate",
+                            1
+                        )
+                        amount = amount?.minus(amountVal.toString().toInt())
+                        editor?.putInt("amount", amount!!)?.apply()
+                        viewModel.upsert(expense)
+                    } else { Toast.makeText(requireContext(), "Please enter Amount", Toast.LENGTH_LONG).show() }
+                } else { Toast.makeText(requireContext(), "Please enter Source", Toast.LENGTH_LONG).show() }
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         val expenseAdapter = ExpenseAdapter(requireContext())
         rvExpenses.apply {
@@ -125,9 +162,48 @@ class ExpenseFragment : Fragment(R.layout.fragment_expense) {
                 Snackbar.make(view, "Deleted Successfully", Snackbar.LENGTH_LONG).apply {
                     setAction("Undo") {
                         viewModel.upsert(expense)
+                        /*
+                        if(expense.type==0) {
+                            val newAmount = (amount?.plus(expense.amount)?.div(2))
+                            editor?.putInt("amount", newAmount!!)?.apply()
+                        } else {
+                            val newAmount = (amount?.minus(expense.amount)?.div(2))
+                            editor?.putInt("amount", newAmount!!)?.apply()
+                        }
+
+                       */
                     }
-                    show()
-                }
+                    show() }
+
+
+
+
+                /*
+                AlertDialog.Builder(requireContext()).setTitle("Expense Manager").setMessage("Also make changes to Amount?")
+                    .setPositiveButton("Ok") {dialogInterface, i ->
+
+                        if(expense.type==0) {
+                            val newAmount = amount?.minus(expense.amount)
+                            editor?.putInt("amount", newAmount!!)?.apply()
+                        } else {
+                            val newAmount = amount?.plus(expense.amount)
+                            editor?.putInt("amount", newAmount!!)?.apply()
+                        }
+
+                        }
+                        dialogInterface.dismiss()
+                    }.setNegativeButton("Cancle") {dialogInterface, i ->
+                        Snackbar.make(view, "Deleted Successfully", Snackbar.LENGTH_LONG).apply {
+                            setAction("Undo") {
+                                viewModel.upsert(expense)
+                            }
+                            show()
+                        }
+                        dialogInterface.dismiss()
+                    }.create().show()
+
+            */
+
 
 
 

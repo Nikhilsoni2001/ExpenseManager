@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.e.expensemanager.R
+import com.e.expensemanager.ui.adapters.TokenSharedPreferenceLiveData
 import com.e.expensemanager.ui.mvvm.ExpenseDatabase
 import com.e.expensemanager.ui.mvvm.ExpenseRepository
 import com.e.expensemanager.ui.mvvm.ExpenseViewModel
@@ -28,10 +29,11 @@ class ExpenseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_expense)
 
+        val sharedPref = getSharedPreferences("myExpense", Context.MODE_PRIVATE)
 
         val database = ExpenseDatabase(this)
         val repository = ExpenseRepository(database)
-        val factory = ExpenseViewModelProviderFactory(repository)
+        val factory = ExpenseViewModelProviderFactory(repository, TokenSharedPreferenceLiveData(sharedPref))
         viewModel = ViewModelProvider(this,factory).get(ExpenseViewModel::class.java)
 
 

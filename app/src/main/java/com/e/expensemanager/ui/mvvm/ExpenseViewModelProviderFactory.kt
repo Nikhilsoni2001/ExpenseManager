@@ -2,11 +2,13 @@ package com.e.expensemanager.ui.mvvm
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.e.expensemanager.ui.adapters.TokenSharedPreferenceLiveData
 
 class ExpenseViewModelProviderFactory(
-    private val repository: ExpenseRepository
+    private val repository: ExpenseRepository,
+    private val tokenSharedPreferenceLiveData: TokenSharedPreferenceLiveData
 ): ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return ExpenseViewModel(repository) as T
+        return ExpenseViewModel(repository,tokenSharedPreferenceLiveData) as T
     }
 }
