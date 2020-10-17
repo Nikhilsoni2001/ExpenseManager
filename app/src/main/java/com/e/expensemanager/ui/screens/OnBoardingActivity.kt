@@ -14,6 +14,8 @@ class OnBoardingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_on_boarding)
 
+
+
         var currency = "empty"
         val sharedPref = getSharedPreferences("myExpense",Context.MODE_PRIVATE)
         val editor = sharedPref.edit()
@@ -34,16 +36,16 @@ class OnBoardingActivity : AppCompatActivity() {
         }
 
 
-        btnStart.setOnClickListener {
-            if(etAmount.text.isNotEmpty()) {
+        btnIshant.setOnClickListener {
+            if(etAmount1.text.isNotEmpty()) {
                 if(currency!="empty") {
                     //Toast.makeText(this, "$currency", Toast.LENGTH_SHORT).show()
                     editor.apply {
-                        putInt("amount",etAmount.text.toString().toInt())
+                        putInt("amount",etAmount1.text.toString().toInt())
                         putString("currency",currency)
                         apply()
                     }
-                    Toast.makeText(this, "Success ${etAmount.text.toString().toInt()} $currency", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Success ${etAmount1.text.toString().toInt()} $currency", Toast.LENGTH_SHORT).show()
 
 
                 } else {
