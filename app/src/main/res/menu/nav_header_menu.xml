@@ -4,8 +4,9 @@
         android:id="@+id/miExpenses"
         android:title="Expenses" />
     <item
-            android:id="@+id/miIncome"
-            android:title="Income" />
+            android:id="@+id/miDashboard"
+            android:icon="@drawable/dashboard"
+            android:title="Dashboard" />
     <item
             android:id="@+id/miContact"
             android:title="Contact" />

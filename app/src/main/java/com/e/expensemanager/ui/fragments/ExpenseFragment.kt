@@ -42,15 +42,7 @@ class ExpenseFragment : Fragment(R.layout.fragment_expense) {
         val editor = sharedPref?.edit()
         viewModel.getTokenLiveData().observe(viewLifecycleOwner, Observer {
             tvExpense.text = " ${sharedPref?.getString("currency", null)} $it"
-
         })
-
-
-
-
-
-
-
 
         btnIncrease.setOnClickListener {
             val dialogView = LayoutInflater.from(requireContext()).inflate(
@@ -83,7 +75,6 @@ class ExpenseFragment : Fragment(R.layout.fragment_expense) {
             }
         }
 
-
         btnDecrease.setOnClickListener {
             val dialogView = LayoutInflater.from(requireContext()).inflate(
                 R.layout.expense_change_dialog_box,
@@ -115,31 +106,6 @@ class ExpenseFragment : Fragment(R.layout.fragment_expense) {
             }
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         val expenseAdapter = ExpenseAdapter(requireContext())
         rvExpenses.apply {
             adapter = expenseAdapter
@@ -165,70 +131,15 @@ class ExpenseFragment : Fragment(R.layout.fragment_expense) {
                 Snackbar.make(view, "Deleted Successfully", Snackbar.LENGTH_LONG).apply {
                     setAction("Undo") {
                         viewModel.upsert(expense)
-                        /*
-                        if(expense.type==0) {
-                            val newAmount = (amount?.plus(expense.amount)?.div(2))
-                            editor?.putInt("amount", newAmount!!)?.apply()
-                        } else {
-                            val newAmount = (amount?.minus(expense.amount)?.div(2))
-                            editor?.putInt("amount", newAmount!!)?.apply()
-                        }
-
-                       */
                     }
                     show() }
-
-
-
-
-
-
-
-                /*
-                AlertDialog.Builder(requireContext()).setTitle("Expense Manager").setMessage("Also make changes to Amount?")
-                    .setPositiveButton("Ok") {dialogInterface, i ->
-
-                        if(expense.type==0) {
-                            val newAmount = amount?.minus(expense.amount)
-                            editor?.putInt("amount", newAmount!!)?.apply()
-                        } else {
-                            val newAmount = amount?.plus(expense.amount)
-                            editor?.putInt("amount", newAmount!!)?.apply()
-                        }
-
-                        }
-                        dialogInterface.dismiss()
-                    }.setNegativeButton("Cancle") {dialogInterface, i ->
-                        Snackbar.make(view, "Deleted Successfully", Snackbar.LENGTH_LONG).apply {
-                            setAction("Undo") {
-                                viewModel.upsert(expense)
-                            }
-                            show()
-                        }
-                        dialogInterface.dismiss()
-                    }.create().show()
-
-            */
-
-
-
-
             }
         }
-
         val itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
         itemTouchHelper.attachToRecyclerView(rvExpenses)
-
-
-
-
 
         viewModel.getAllExpenses().observe(viewLifecycleOwner, Observer { expenseList ->
             expenseAdapter.differ.submitList(expenseList)
         })
-
-
     }
-
-
 }
