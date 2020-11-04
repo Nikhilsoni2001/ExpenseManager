@@ -41,9 +41,7 @@ class ExpenseAdapter(context: Context): RecyclerView.Adapter<ExpenseAdapter.Expe
         val expense = differ.currentList[position]
         holder.itemView.apply {
             tvSourceText.text = expense.source
-            //tvAmount.text = expense.amount.toString()
             tvDate.text = expense.date
-
             if(expense.type==0) {
                 tvAmount.setTextColor(ContextCompat.getColor(context,R.color.green))
                 tvAmount.text = "+ $currency${expense.amount}"

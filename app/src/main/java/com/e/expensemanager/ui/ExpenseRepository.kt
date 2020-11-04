@@ -12,6 +12,7 @@ class ExpenseRepository(
     fun getAllExpenses() = db.getExpenseDao().getAllExpenses()
     suspend fun insert(expense: CreDebData) = db.getCredDebDao().insert(expense)
     suspend fun deleteCD(expense: CreDebData) = db.getCredDebDao().delete(expense)
-    fun getAllData() = db.getCredDebDao().getAllData()
+    fun getAllCreditData() = db.getCredDebDao().getAllCreditData()
+    fun getAllDebitData() = db.getCredDebDao().getAllDebitData()
 
 }

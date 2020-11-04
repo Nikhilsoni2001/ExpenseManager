@@ -27,10 +27,10 @@ class ExpenseViewModel(
         repository.insert(expense)
     }
 
-    fun deleteCD(expense: CreDebData) = viewModelScope.launch {
-        repository.deleteCD(expense)
+    fun deleteCD(credDeb: CreDebData) = viewModelScope.launch {
+        repository.deleteCD(credDeb)
     }
 
-    fun getAllData() = repository.getAllData()
-
+    fun getAllCreditData() = repository.getAllCreditData()
+    fun getAllDebitData() = repository.getAllDebitData()
 }

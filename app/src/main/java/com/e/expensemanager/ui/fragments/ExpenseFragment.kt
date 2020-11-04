@@ -90,7 +90,7 @@ class ExpenseFragment : Fragment(R.layout.fragment_expense) {
             )
             val dialogBuilder = AlertDialog.Builder(requireContext()).setView(dialogView)
                 .setTitle("Please fill the details")
-            val dialogBox = dialogBuilder.show()
+            dialogBuilder.show()
             val etSourceVal = dialogView.findViewById<EditText>(R.id.etSource)
             val etAmountVal = dialogView.findViewById<EditText>(R.id.etAmount)
             val sourceVal = etSourceVal.text
