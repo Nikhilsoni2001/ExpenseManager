@@ -1,15 +1,14 @@
-package com.e.expensemanager.ui.mvvm
+package com.e.expensemanager.db
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "expenses")
-data class Expense(
+@Entity(tableName = "cre_deb")
+class CreDebData(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
     val source: String,
     val amount: Int,
     val date: String,
     val type: Int
-    //0 means increase; 1 means decrease;
 )

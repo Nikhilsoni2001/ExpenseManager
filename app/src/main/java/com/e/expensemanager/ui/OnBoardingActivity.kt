@@ -1,4 +1,4 @@
-package com.e.expensemanager.ui.screens
+package com.e.expensemanager.ui
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity

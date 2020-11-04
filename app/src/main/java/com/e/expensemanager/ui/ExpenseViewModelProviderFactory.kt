@@ -1,4 +1,4 @@
-package com.e.expensemanager.ui.mvvm
+package com.e.expensemanager.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

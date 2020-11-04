@@ -1,4 +1,4 @@
-package com.e.expensemanager.ui.screens
+package com.e.expensemanager.ui
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
@@ -11,10 +11,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.e.expensemanager.R
 import com.e.expensemanager.ui.adapters.TokenSharedPreferenceLiveData
-import com.e.expensemanager.ui.mvvm.ExpenseDatabase
-import com.e.expensemanager.ui.mvvm.ExpenseRepository
-import com.e.expensemanager.ui.mvvm.ExpenseViewModel
-import com.e.expensemanager.ui.mvvm.ExpenseViewModelProviderFactory
+import com.e.expensemanager.db.ExpenseDatabase
 import kotlinx.android.synthetic.main.activity_expense.*
 import kotlinx.android.synthetic.main.nav_header.view.*
 
@@ -43,7 +40,7 @@ class ExpenseActivity : AppCompatActivity() {
             //Toast.makeText(this,"Success",Toast.LENGTH_LONG).show()
             findNavController(R.id.fragment).navigate(R.id.expenseLossGraphFragment)
         }
-        toggle = ActionBarDrawerToggle(this,drawerLayout,R.string.open,R.string.close)
+        toggle = ActionBarDrawerToggle(this,drawerLayout, R.string.open, R.string.close)
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
