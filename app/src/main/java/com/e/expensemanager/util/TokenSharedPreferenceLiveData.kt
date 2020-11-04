@@ -1,4 +1,4 @@
-package com.e.expensemanager.ui.adapters
+package com.e.expensemanager.util
 
 import android.content.SharedPreferences
 import androidx.lifecycle.LiveData

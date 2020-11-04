@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.e.expensemanager.R
 import com.e.expensemanager.db.CreDebData
-import com.e.expensemanager.ui.ExpenseActivity
+import com.e.expensemanager.ui.activity.ExpenseActivity
 import com.e.expensemanager.ui.adapters.CreDebAdapter
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.floatingactionbutton.FloatingActionButton

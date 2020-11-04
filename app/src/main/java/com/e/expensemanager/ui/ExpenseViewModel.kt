@@ -3,7 +3,7 @@ package com.e.expensemanager.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.e.expensemanager.db.CreDebData
-import com.e.expensemanager.ui.adapters.TokenSharedPreferenceLiveData
+import com.e.expensemanager.util.TokenSharedPreferenceLiveData
 import com.e.expensemanager.db.Expense
 import kotlinx.coroutines.launch
 

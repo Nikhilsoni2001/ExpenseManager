@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.e.expensemanager.R
 import com.e.expensemanager.ui.adapters.ExpenseAdapter
 import com.e.expensemanager.db.Expense
-import com.e.expensemanager.ui.ExpenseActivity
+import com.e.expensemanager.ui.activity.ExpenseActivity
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.expense_change_dialog_box.view.*
 import kotlinx.android.synthetic.main.fragment_expense.*

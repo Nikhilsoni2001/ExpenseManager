@@ -1,4 +1,4 @@
-package com.e.expensemanager.ui
+package com.e.expensemanager.ui.activity
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity

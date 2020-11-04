@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.e.expensemanager.R
 import com.e.expensemanager.ui.ExpenseViewModel
-import com.e.expensemanager.ui.ExpenseActivity
+import com.e.expensemanager.ui.activity.ExpenseActivity
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry

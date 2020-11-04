@@ -1,4 +1,4 @@
-package com.e.expensemanager.ui
+package com.e.expensemanager.ui.activity
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
@@ -10,8 +10,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.e.expensemanager.R
-import com.e.expensemanager.ui.adapters.TokenSharedPreferenceLiveData
+import com.e.expensemanager.util.TokenSharedPreferenceLiveData
 import com.e.expensemanager.db.ExpenseDatabase
+import com.e.expensemanager.ui.ExpenseRepository
+import com.e.expensemanager.ui.ExpenseViewModel
+import com.e.expensemanager.ui.ExpenseViewModelProviderFactory
 import kotlinx.android.synthetic.main.activity_expense.*
 import kotlinx.android.synthetic.main.nav_header.view.*
 
