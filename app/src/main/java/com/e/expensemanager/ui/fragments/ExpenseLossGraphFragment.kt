@@ -10,15 +10,13 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.e.expensemanager.R
-import com.e.expensemanager.ui.mvvm.ExpenseViewModel
-import com.e.expensemanager.ui.screens.ExpenseActivity
+import com.e.expensemanager.ui.ExpenseViewModel
+import com.e.expensemanager.ui.activity.ExpenseActivity
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.utils.ColorTemplate
 import kotlinx.android.synthetic.main.fragment_loss_expense_graph.*
-import kotlinx.android.synthetic.main.fragment_profit_expense_graph.*
-import kotlinx.android.synthetic.main.fragment_profit_expense_graph.barChart
 
 
 class ExpenseLossGraphFragment : Fragment(R.layout.fragment_loss_expense_graph) {

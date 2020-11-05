@@ -1,12 +1,10 @@
-package com.e.expensemanager.ui.screens
+package com.e.expensemanager.ui.activity
 
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import com.e.expensemanager.R
-import kotlinx.android.synthetic.main.activity_on_boarding.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay

@@ -9,16 +9,16 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.e.expensemanager.R
-import com.e.expensemanager.ui.mvvm.Expense
+import com.e.expensemanager.db.Expense
 import kotlinx.android.synthetic.main.expense.view.*
 
 class ExpenseAdapter(context: Context): RecyclerView.Adapter<ExpenseAdapter.ExpenseViewHolder>() {
     inner class ExpenseViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
 
-    val sharedPref = context.getSharedPreferences("myExpense", Context.MODE_PRIVATE)
-    val currency = sharedPref?.getString("currency",null)
+    private val sharedPref = context.getSharedPreferences("myExpense", Context.MODE_PRIVATE)
+    private val currency = sharedPref?.getString("currency",null)
 
-    val differCallback = object: DiffUtil.ItemCallback<Expense>() {
+    private val differCallback = object: DiffUtil.ItemCallback<Expense>() {
         override fun areItemsTheSame(oldItem: Expense, newItem: Expense): Boolean {
             return oldItem.id == newItem.id
         }
@@ -41,9 +41,7 @@ class ExpenseAdapter(context: Context): RecyclerView.Adapter<ExpenseAdapter.Expe
         val expense = differ.currentList[position]
         holder.itemView.apply {
             tvSourceText.text = expense.source
-            //tvAmount.text = expense.amount.toString()
             tvDate.text = expense.date
-
             if(expense.type==0) {
                 tvAmount.setTextColor(ContextCompat.getColor(context,R.color.green))
                 tvAmount.text = "+ $currency${expense.amount}"

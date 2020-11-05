@@ -1,4 +1,4 @@
-package com.e.expensemanager.ui.mvvm
+package com.e.expensemanager.db
 
 import androidx.lifecycle.LiveData
 import androidx.room.*

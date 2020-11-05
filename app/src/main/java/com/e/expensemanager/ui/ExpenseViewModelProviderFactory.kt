@@ -1,8 +1,8 @@
-package com.e.expensemanager.ui.mvvm
+package com.e.expensemanager.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.e.expensemanager.ui.adapters.TokenSharedPreferenceLiveData
+import com.e.expensemanager.util.TokenSharedPreferenceLiveData
 
 class ExpenseViewModelProviderFactory(
     private val repository: ExpenseRepository,
