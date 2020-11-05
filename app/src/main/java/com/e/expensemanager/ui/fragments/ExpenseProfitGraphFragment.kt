@@ -24,12 +24,7 @@ class ExpenseProfitGraphFragment : Fragment(R.layout.fragment_profit_expense_gra
 
     lateinit var viewModel: ExpenseViewModel
 
-
-
-
     var barEntries = mutableListOf<BarEntry>()
-
-
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -37,14 +32,17 @@ class ExpenseProfitGraphFragment : Fragment(R.layout.fragment_profit_expense_gra
 
         viewModel = (activity as ExpenseActivity).viewModel
 
-        if(barEntries.isEmpty()) {
-            Toast.makeText(requireContext(),"Loading, Please tap on screen to proceed",Toast.LENGTH_LONG).show()
+        if (barEntries.isEmpty()) {
+            Toast.makeText(
+                requireContext(),
+                "Loading, Please tap on screen to proceed",
+                Toast.LENGTH_LONG
+            ).show()
         }
-
 
         viewModel.getAllExpenses().observe(viewLifecycleOwner, Observer { expenses ->
             for (expense in expenses) {
-                if(expense.type==0) {
+                if (expense.type == 0) {
 
                     barEntries.add(
                         BarEntry(
@@ -55,19 +53,15 @@ class ExpenseProfitGraphFragment : Fragment(R.layout.fragment_profit_expense_gra
                 }
             }
 
-
-
-
             barDataSet = BarDataSet(barEntries, "Data Set")
             barData = BarData(barDataSet)
 
             barChart.data = barData
-            var colorList = mutableListOf<Int>()
+            val colorList = mutableListOf<Int>()
 
             for (i in 0..ColorTemplate.MATERIAL_COLORS.size - 1) {
                 colorList.add(ColorTemplate.MATERIAL_COLORS[i])
             }
-
 
             barDataSet.colors = colorList
 
@@ -76,14 +70,4 @@ class ExpenseProfitGraphFragment : Fragment(R.layout.fragment_profit_expense_gra
 
         })
     }
-
-
-
 }
-
-
-
-
-
-
-
