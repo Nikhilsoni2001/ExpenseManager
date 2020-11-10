@@ -21,18 +21,11 @@ import kotlinx.android.synthetic.main.fragment_loss_expense_graph.*
 
 class ExpenseLossGraphFragment : Fragment(R.layout.fragment_loss_expense_graph) {
 
-
     lateinit var barData: BarData
     lateinit var barDataSet: BarDataSet
-
     lateinit var viewModel: ExpenseViewModel
 
-
-
-
     var barEntries = mutableListOf<BarEntry>()
-
-
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -44,11 +37,9 @@ class ExpenseLossGraphFragment : Fragment(R.layout.fragment_loss_expense_graph) 
             Toast.makeText(requireContext(),"Loading, Please tap on screen to proceed",Toast.LENGTH_LONG).show()
         }
 
-
         viewModel.getAllExpenses().observe(viewLifecycleOwner, Observer { expenses ->
             for (expense in expenses) {
                 if(expense.type==1) {
-
                     barEntries.add(
                         BarEntry(
                             expenses.indexOf(expense).toFloat(),
@@ -58,30 +49,18 @@ class ExpenseLossGraphFragment : Fragment(R.layout.fragment_loss_expense_graph) 
                 }
             }
 
-
-
-
             barDataSet = BarDataSet(barEntries, "Data Set")
             barData = BarData(barDataSet)
 
             barChart1.data = barData
-            var colorList = mutableListOf<Int>()
+            val colorList = mutableListOf<Int>()
 
             for (i in 0..ColorTemplate.MATERIAL_COLORS.size - 1) {
                 colorList.add(ColorTemplate.MATERIAL_COLORS[i])
             }
-
-
             barDataSet.colors = colorList
-
             barDataSet.valueTextColor = requireContext().getColor(R.color.black)
             barDataSet.valueTextSize = 16f
-
         })
     }
-
-
-
-
-
 }

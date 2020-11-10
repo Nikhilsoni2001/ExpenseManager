@@ -1,15 +1,12 @@
 package com.e.expensemanager.ui.fragments
 
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.EditText
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,116 +14,109 @@ import com.e.expensemanager.R
 import com.e.expensemanager.ui.adapters.ExpenseAdapter
 import com.e.expensemanager.db.Expense
 import com.e.expensemanager.ui.activity.ExpenseActivity
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.expense_change_dialog_box.view.*
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.fragment_expense.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-
 class ExpenseFragment : Fragment(R.layout.fragment_expense) {
-
-
+    @SuppressLint("SetTextI18n", "SimpleDateFormat")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val viewModel = (activity as ExpenseActivity).viewModel
 
-        val sharedPref = activity?.getSharedPreferences("myExpense", Context.MODE_PRIVATE)
-        var amount = sharedPref?.getInt("amount", 0)
-        val currency = sharedPref?.getString("currency", null)
-        val editor = sharedPref?.edit()
-        viewModel.getTokenLiveData().observe(viewLifecycleOwner, Observer {
-            tvExpense.text = " ${sharedPref?.getString("currency", null)} $it"
-        })
+        val currency = viewModel.getCurrency()
+
+        tvExpense.text = "$currency 0"
 
         btnIncrease.setOnClickListener {
-            val dialogView = LayoutInflater.from(requireContext()).inflate(
-                R.layout.expense_change_dialog_box,
-                null
-            )
+            val dialogView =
+                LayoutInflater.from(requireContext())
+                    .inflate(R.layout.custom_dialog_box, null)
+
             val dialogBuilder = AlertDialog.Builder(requireContext()).setView(dialogView)
-                .setTitle("Please fill the details")
+                .setTitle("Please Fill the details")
             val dialogBox = dialogBuilder.show()
-            val etSourceVal = dialogView.findViewById<EditText>(R.id.etSource)
-            val etAmountVal = dialogView.findViewById<EditText>(R.id.etAmount)
-            val sourceVal = etSourceVal.text
-            val amountVal = etAmountVal.text
-            dialogView.btnSave.setOnClickListener {
-                Toast.makeText(
-                    requireContext(),
-                    "$currency$amountVal from $sourceVal added",
-                    Toast.LENGTH_LONG
-                ).show()
-                if (sourceVal.isNotEmpty()) {
-                    if (amountVal.isNotEmpty()) {
+
+            val elAmount = dialogView.findViewById<TextInputLayout>(R.id.elAmount)
+            val etAmount = dialogView.findViewById<TextInputEditText>(R.id.etAmount)
+            val elSource = dialogView.findViewById<TextInputLayout>(R.id.elSource)
+            val etSource = dialogView.findViewById<TextInputEditText>(R.id.etSource)
+            val btnSave = dialogView.findViewById<MaterialButton>(R.id.btnSave)
+
+            btnSave.setOnClickListener {
+                if (etAmount.text?.trim()?.isNotEmpty()!!) {
+                    elAmount.error = null
+                    if (etSource.text?.trim()?.isNotEmpty()!!) {
+                        elSource.error = null
+                        // update
                         val sdf = SimpleDateFormat("dd MMMM yyyy, hh:mm")
                         val currentDate = sdf.format(Date())
                         val expense = Expense(
                             0,
-                            sourceVal.toString(),
-                            amountVal.toString().toInt(),
-                            "$currentDate",
+                            etSource.text.toString(),
+                            etAmount.text.toString().toInt(),
+                            currentDate,
                             0
                         )
-                        amount = amount?.plus(amountVal.toString().toInt())
-                        editor?.putInt("amount", amount!!)?.apply()
                         viewModel.upsert(expense)
+                        dialogBox.cancel()
                     } else {
-                        Toast.makeText(requireContext(), "Please enter Amount", Toast.LENGTH_LONG)
-                            .show()
+                        elSource.error = "Please enter a valid Source Name"
                     }
                 } else {
-                    Toast.makeText(requireContext(), "Please enter Source", Toast.LENGTH_LONG)
-                        .show()
+                    elAmount.error = "Please Enter a valid amount"
                 }
             }
         }
 
         btnDecrease.setOnClickListener {
-            val dialogView = LayoutInflater.from(requireContext()).inflate(
-                R.layout.expense_change_dialog_box,
-                null
-            )
+            val dialogView =
+                LayoutInflater.from(requireContext())
+                    .inflate(R.layout.custom_dialog_box, null)
+
             val dialogBuilder = AlertDialog.Builder(requireContext()).setView(dialogView)
-                .setTitle("Please fill the details")
-            dialogBuilder.show()
-            val etSourceVal = dialogView.findViewById<EditText>(R.id.etSource)
-            val etAmountVal = dialogView.findViewById<EditText>(R.id.etAmount)
-            val sourceVal = etSourceVal.text
-            val amountVal = etAmountVal.text
-            dialogView.btnSave.setOnClickListener {
-                Toast.makeText(
-                    requireContext(),
-                    "$currency$amountVal from $sourceVal reduced",
-                    Toast.LENGTH_LONG
-                ).show()
-                if (sourceVal.isNotEmpty()) {
-                    if (amountVal.isNotEmpty()) {
+                .setTitle("Please Fill the details")
+            val dialogBox = dialogBuilder.show()
+
+            val elAmount = dialogView.findViewById<TextInputLayout>(R.id.elAmount)
+            val etAmount = dialogView.findViewById<TextInputEditText>(R.id.etAmount)
+            val elSource = dialogView.findViewById<TextInputLayout>(R.id.elSource)
+            val etSource = dialogView.findViewById<TextInputEditText>(R.id.etSource)
+            val btnSave = dialogView.findViewById<MaterialButton>(R.id.btnSave)
+
+            btnSave.setOnClickListener {
+                if (etAmount.text?.trim()?.isNotEmpty()!!) {
+                    elAmount.error = null
+                    if (etSource.text?.trim()?.isNotEmpty()!!) {
+                        elSource.error = null
+                        // update
                         val sdf = SimpleDateFormat("dd MMMM yyyy, hh:mm")
                         val currentDate = sdf.format(Date())
+
                         val expense = Expense(
                             0,
-                            sourceVal.toString(),
-                            amountVal.toString().toInt(),
-                            "$currentDate",
+                            etSource.text.toString(),
+                            etAmount.text.toString().toInt(),
+                            currentDate,
                             1
                         )
-                        amount = amount?.minus(amountVal.toString().toInt())
-                        editor?.putInt("amount", amount!!)?.apply()
                         viewModel.upsert(expense)
+                        dialogBox.cancel()
                     } else {
-                        Toast.makeText(requireContext(), "Please enter Amount", Toast.LENGTH_LONG)
-                            .show()
+                        elSource.error = "Please enter a valid Source Name"
                     }
                 } else {
-                    Toast.makeText(requireContext(), "Please enter Source", Toast.LENGTH_LONG)
-                        .show()
+                    elAmount.error = "Please Enter a valid amount"
                 }
             }
         }
 
-        val expenseAdapter = ExpenseAdapter(requireContext())
+        val expenseAdapter = ExpenseAdapter()
         rvExpenses.apply {
             adapter = expenseAdapter
             layoutManager = LinearLayoutManager(requireContext())
@@ -160,7 +150,7 @@ class ExpenseFragment : Fragment(R.layout.fragment_expense) {
         val itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
         itemTouchHelper.attachToRecyclerView(rvExpenses)
 
-        viewModel.getAllExpenses().observe(viewLifecycleOwner, Observer { expenseList ->
+        viewModel.getAllExpenses().observe(viewLifecycleOwner, { expenseList ->
             expenseAdapter.differ.submitList(expenseList)
         })
     }
