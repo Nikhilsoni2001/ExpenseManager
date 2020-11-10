@@ -3,13 +3,13 @@ package com.e.expensemanager.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.e.expensemanager.db.CreDebData
-import com.e.expensemanager.util.TokenSharedPreferenceLiveData
 import com.e.expensemanager.db.Expense
+import com.e.expensemanager.util.Preferences
 import kotlinx.coroutines.launch
 
 class ExpenseViewModel(
     private val repository: ExpenseRepository,
-    private val tokenSharedPreferenceLiveData: TokenSharedPreferenceLiveData
+    private val preferences: Preferences
 ) : ViewModel() {
     fun upsert(expense: Expense) = viewModelScope.launch {
         repository.upsert(expense)
@@ -21,7 +21,8 @@ class ExpenseViewModel(
 
     fun getAllExpenses() = repository.getAllExpenses()
 
-    fun getTokenLiveData() = tokenSharedPreferenceLiveData
+    fun getCurrency() = preferences.getCurrency()
+    fun setCurrency(currency: String) = preferences.setCurrency(currency)
 
     fun insert(expense: CreDebData) = viewModelScope.launch {
         repository.insert(expense)
