@@ -4,14 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/lightGray1"
     tools:context=".ui.fragments.ExpenseFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
         android:paddingBottom="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -23,10 +21,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
+            android:textColor="@color/textColor"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="30dp"
             android:text="@string/your_money"
-            android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -73,7 +71,7 @@
             app:layout_constraintEnd_toStartOf="@+id/tvExpense"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tvExpense"
-            app:rippleColor="@color/colorPrimaryDark"
+            app:rippleColor="@color/colorSecondary"
             tools:targetApi="lollipop" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -89,7 +87,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tvExpense"
             app:layout_constraintTop_toTopOf="@+id/tvExpense"
-            app:rippleColor="@color/colorPrimaryDark"
+            app:rippleColor="@color/colorSecondary"
             tools:targetApi="lollipop" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

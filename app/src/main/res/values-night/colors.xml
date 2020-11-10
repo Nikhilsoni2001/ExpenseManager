@@ -12,8 +12,6 @@
 
     <color name="green">#5CB85C</color>
     <color name="red">#FE0000</color>
-
-    <color name="textColor">@android:color/black</color>
-    <color name="backColor">#eeeeee</color>
-
+    <color name="textColor">@android:color/white</color>
+    <color name="backColor">#212121</color>
 </resources>

@@ -31,7 +31,7 @@
         android:layout_margin="15dp"
         android:layout_marginTop="32dp"
         android:text="@string/select_currency_unit"
-        android:textColor="@color/black"
+        android:textColor="@color/textColor"
         android:textSize="35sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/btnGetStarted"
