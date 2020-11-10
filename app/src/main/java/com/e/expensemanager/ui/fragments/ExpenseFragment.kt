@@ -23,7 +23,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class ExpenseFragment : Fragment(R.layout.fragment_expense) {
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "SimpleDateFormat")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -116,7 +116,7 @@ class ExpenseFragment : Fragment(R.layout.fragment_expense) {
             }
         }
 
-        val expenseAdapter = ExpenseAdapter(requireContext())
+        val expenseAdapter = ExpenseAdapter()
         rvExpenses.apply {
             adapter = expenseAdapter
             layoutManager = LinearLayoutManager(requireContext())
